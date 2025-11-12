@@ -6,6 +6,9 @@ import { useSelector, useDispatch } from 'react-redux'
 export function Home() {
   const count = useSelector((state) => state.counter)
   const dispatch = useDispatch()
+if (count > 2) {
+  throw new Error("💥 Simulated crash: count exceeded 2!");
+}
 
   return (
     <div>
