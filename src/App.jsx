@@ -1,8 +1,7 @@
 
 import { Toaster } from "sonner";
 import { Route, Routes } from "react-router-dom";
-import {Home} from "./app/home/home";
-import ErrorBoundry from "./components/error-boundry/error-boundry";
+import Interview from "./app/interview/interview";
 function App() {
 
   return (
@@ -10,12 +9,13 @@ function App() {
      
       <Toaster richColors position="top-right" />
   
-    <ErrorBoundry>
+   
  <Routes>
  
-      <Route path="*" element={<Home />} />
+      <Route path="/" element={<Interview />} />
+
     </Routes>
-    </ErrorBoundry>
+  
     </>
   );
 }

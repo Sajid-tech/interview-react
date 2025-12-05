@@ -1,42 +1,27 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "default");
+  const [theme, setTheme] = useState("light");
 
-  useEffect(() => {
-    const root = document.documentElement;
-  
-   
-    root.classList.remove(
-      "theme-yellow",
-      "theme-green",
-      "theme-purple",
-      "theme-teal",
-      "theme-gray"
-    );
-  
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
 
-    if (theme === "yellow") {
-      root.classList.add("theme-yellow");
-    } else if (theme === "green") {
-      root.classList.add("theme-green");
-    } else if (theme === "purple") {
-      root.classList.add("theme-purple");
-    } else if (theme === "teal") {
-      root.classList.add("theme-teal");
-    } else if (theme === "gray") {
-      root.classList.add("theme-gray");
-    }
-  
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-  
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      {children}
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <div
+        className={
+          theme === "light"
+            ? "bg-white text-black"
+            : "bg-black text-white"
+        }
+        style={{ minHeight: "100vh" }}
+      >
+        {children}
+      </div>
     </ThemeContext.Provider>
   );
 };
